@@ -3,7 +3,7 @@
 <html>
 <head>
 
-<body onload="draw(0);">
+<body onload="draw(8);">
 <label for="steps">Insert number of steps </label>
 <input type="text" id="steps" name="steps">
 <button type="button" id="myBtn" onclick="myFunction()">start</button>
@@ -43,9 +43,11 @@
 
       if (steps != null) {
         var first = true;
-        if(steps ==0)
+        /*if(steps ==0)
           drawZ();
         else
+
+         */
         drawF(steps);
       }
     }
