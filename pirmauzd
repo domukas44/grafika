@@ -3,10 +3,14 @@
 <html>
 <head>
 
-<body onload="draw(8);">
+<body onload="draw(0);">
 <label for="steps">Insert number of steps </label>
 <input type="text" id="steps" name="steps">
 <button type="button" id="myBtn" onclick="myFunction()">start</button>
+<button type="button" id="anim1" onclick="anim1()">1st animation</button>
+<button type="button" id="anim2" onclick="anim2()">2nd animation</button>
+<button type="button" id="anim3" onclick="anim3()">3rd animation</button>
+<button type="button" id="anim4" onclick="anim4()">4th animation</button>
 <br/>
 <br/>
 <canvas id="canvas" width="500" height="500"></canvas>
@@ -22,6 +26,218 @@
     draw(document.getElementById("steps").value);
     else
       draw(0);
+  }
+
+  function borders() {
+    var canvas = document.getElementById('canvas');
+    if (canvas.getContext) {
+      var ctx = canvas.getContext("2d");
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(500, 0);
+      ctx.lineTo(500, 500);
+      ctx.lineTo(0, 500);
+      ctx.closePath();
+      ctx.stroke();
+    }
+  }
+
+  //1 animacija
+  function anim1() {
+
+    var canvas = document.getElementById('canvas');
+    if (canvas.getContext) {
+      var ctx = canvas.getContext("2d");
+
+      var x = 0;
+      var y = 0;
+      var v=1;
+      var rotation = 0;
+      var interval1 = setInterval(animate1, 20);
+      //ctx.translate(500,0);
+      //ctx.scale(0.5,0.5);
+
+
+      function animate1() {
+
+        if(rotation>90) clearInterval(interval1);
+
+        else {
+
+          ctx.save()
+          ctx.clearRect(0, 0, 500, 500);
+          borders();
+          ctx.translate(x,0);
+          ctx.rotate(rotation * Math.PI / 180);
+          ctx.scale(v,v);
+
+          //rotate
+          //scale
+          //translate
+          // ctx.transform(0, 0.5, -0.5, 0, 250, 0);
+          animate('red');
+
+          ctx.restore();
+          console.log(" v= " + v);
+          console.log(" rotation = " + rotation);
+          //
+
+          //
+          v-=0.01;
+          //v = Math.floor(v * 100) / 100;
+          rotation+=1.8;
+          //rotation= Math.floor(rotation * 100) / 100;
+
+          x+=5;
+        }
+
+      }
+
+
+    }
+  }
+
+  //2 animacija
+  function anim2() {
+
+    var canvas = document.getElementById('canvas');
+    if (canvas.getContext) {
+      var ctx = canvas.getContext("2d");
+
+      var x = 0;
+      var y = 0;
+      var vx =1;
+      var vy =1;
+     // var rotation = 0;
+      //ctx.save();
+      var interval2 = setInterval(animate2, 20);
+      //ctx.restore();
+
+
+      function animate2() {
+
+        if(x>500) clearInterval(interval2);
+
+        else {
+
+          ctx.save()
+          ctx.clearRect(0, 0, 500, 500);
+          borders();
+          ctx.translate(x,y);
+          ctx.scale(vx,vy);
+
+          animate('green');
+
+          ctx.restore();
+
+          vx-=0.03;
+          vy-=0.01;
+          x+=10;
+          //y+=5;
+        }
+
+      }
+
+
+    }
+  }
+
+  //3 animacija
+  function anim3() {
+
+    var canvas = document.getElementById('canvas');
+    if (canvas.getContext) {
+      var ctx = canvas.getContext("2d");
+
+      var x = 0;
+      var y = 0;
+      var vx =1;
+      var vy =1;
+      // var rotation = 0;
+      //ctx.save();
+      var interval2 = setInterval(animate3, 20);
+      //ctx.restore();
+
+
+      function animate3() {
+
+        if(x>375) clearInterval(interval2);
+
+        else {
+
+          ctx.save()
+          ctx.clearRect(0, 0, 500, 500);
+          borders();
+          ctx.translate(x,y);
+          ctx.scale(vx,vy);
+
+          animate('blue');
+
+          ctx.restore();
+
+          vx-=0.015;
+          vy-=0.025;
+          x+=7.5;
+          y+=7.5;
+        }
+
+      }
+
+
+    }
+  }
+
+  //4 animacija
+  function anim4() {
+
+    var canvas = document.getElementById('canvas');
+    if (canvas.getContext) {
+      var ctx = canvas.getContext("2d");
+      var x = 0;
+      var y = 0;
+      var v=1;
+      var interval = setInterval(animate4, 20);
+
+
+    function animate4() {
+
+      if(y>250) clearInterval(interval);
+
+      else {
+
+        ctx.save()
+        ctx.clearRect(0, 0, 500, 500);
+        borders();
+        ctx.transform(v,0,0,v,x,y);
+        animate('black');
+
+        ctx.restore();
+        v-=0.01;
+        y+=5;
+      }
+
+      }
+
+    }
+  }
+
+  // draw function for animations
+  function animate(color) {
+    var canvas = document.getElementById('canvas');
+    if (canvas.getContext) {
+      var ctx = canvas.getContext("2d");
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(500, 0);
+      ctx.lineTo(500, 375);
+      ctx.lineTo(375, 375); //
+      ctx.lineTo(375, 250);
+      ctx.lineTo(250, 250);
+      ctx.lineTo(250, 500);
+      ctx.lineTo(0, 500);
+      ctx.fill();
+    }
   }
 
   function draw(steps) {
@@ -46,6 +262,7 @@
         drawF(steps);
       }
     }
+
     // Recursive draw
     function drawF(steps, color) {
       var firstStep;
@@ -103,7 +320,7 @@
       ctx.lineTo(0,500);
       ctx.fill();
     }
-    
+
   }
 </script>
 </head>
