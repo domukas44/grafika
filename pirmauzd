@@ -42,7 +42,10 @@
     }
   }
 
-  //1 animacija
+
+
+
+  //1 animacija/*
   function anim1() {
 
     var canvas = document.getElementById('canvas');
@@ -55,19 +58,24 @@
       var rotation = 0;
       var interval1 = setInterval(animate1, 20);
       //ctx.translate(500,0);
+      var sc=1,rt=0,tr=1,tr2=0,tr3=0;
+      var end =0;
       //ctx.scale(0.5,0.5);
+
 
 
       function animate1() {
 
-        if(rotation>90) clearInterval(interval1);
+        if(rotation>89 && end ==1) clearInterval(interval1); //&& x>250
 
         else {
 
           ctx.save()
           ctx.clearRect(0, 0, 500, 500);
           borders();
-          ctx.translate(x,0);
+
+          ctx.translate(x,y);
+
           ctx.rotate(rotation * Math.PI / 180);
           ctx.scale(v,v);
 
@@ -79,19 +87,57 @@
 
           ctx.restore();
           console.log(" v= " + v);
-          console.log(" rotation = " + rotation);
+          //console.log(" rotation = " + rotation);
           //
 
           //
-          v-=0.01;
+
           //v = Math.floor(v * 100) / 100;
-          rotation+=1.8;
+          //rotation+=1.8;
           //rotation= Math.floor(rotation * 100) / 100;
+          if(tr===1){
+            x+=2.5;
+            //y+=2.5;
+          }
 
-          x+=5;
+          if (rotation>89)
+          {
+            rt=0;
+            tr2=0;
+            tr3=1;
+          }
+          if (tr2===1)
+            x+=5.5;
+          if (rt===1){
+
+            rotation+=1.8;
+            //console.log(rotation);
+          }
+          if(x>125 && sc===1) {
+            sc = 0;
+            tr = 0;
+            rt = 1;
+            tr2=1;
+
+          }
+
+
+          if (sc===1) v-=0.01;
+
+
+
+          if (tr3===1 && x<=250)
+            end=1;
+
+          if (tr3===1)
+          {
+            x-=2.5
+          }
+          //250 250
         }
 
       }
+
 
 
     }
