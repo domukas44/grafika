@@ -52,10 +52,10 @@
     if (canvas.getContext) {
       var ctx = canvas.getContext("2d");
 
-      var x = 0;
-      var y = 0;
-      var v=1;
-      var rotation = 0;
+      var x = 0.0;
+      var y = 0.0;
+      var v=1.0;
+      var rotation = 0.0;
       var interval1 = setInterval(animate1, 20);
       //ctx.translate(500,0);
       var sc=1,rt=0,tr=1,tr2=0,tr3=0;
